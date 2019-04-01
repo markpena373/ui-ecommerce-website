@@ -1,9 +1,4 @@
 <!--<app-product-table></app-product-table>-->
-<script type="text/javascript">
-  $(document).ready(function(){
-    $('[data-toggle="popover"]').popover();
-  });
-</script>
 <div class="container-fluid default-background">
   <div class="row">
     <div class="col"></div>
@@ -11,7 +6,7 @@
     <div class="col-6 dashboard-outline dashboard" style="background: white;">
       <form class="dashboard-form">
         <div class="form-group mb-4">
-          <input type="text" class="form-control text-left" placeholder="Search..">
+          <input type="text" class="form-control text-left" [(ngModel)]="searchText" name="search" (input)="filterTable()" placeholder="Search..">
         </div>
 
         <div class="form-row">
@@ -21,8 +16,9 @@
             </button>
             <form class="dropdown-menu p-4 scrollable-menu">
               <div class="form-group">
+                <button type="reset" class="btn btn-outline-primary btn-sm dropdown-button" (click)="clearMakeCheckboxes('make')">Clear all</button>
                 <div *ngFor="let checkbox of makeCheckboxes">
-                  <label><input type="checkbox" value="{{checkbox.make}}" [checked]="checkbox.checked" (change)="onMakeSelection('make', checkbox.make, $event)"></label> {{checkbox.make}}
+                  <label><input type="checkbox" value="{{checkbox.make}}" [checked]="checkbox.checked" (change)="onMakeSelection(checkbox.make.toLowerCase(), $event)"></label> {{checkbox.make}}
                 </div>
               </div>
             </form>
@@ -34,16 +30,17 @@
             </button>
             <form class="dropdown-menu p-4 scrollable-menu">
               <div class="form-group">
+                <button type="reset" class="btn btn-outline-primary btn-sm dropdown-button" (click)="clearMakeCheckboxes('model')">Clear all</button>
                 <div *ngFor="let checkbox of modelCheckBoxes">
-                  <label><input type="checkbox" value="{{checkbox.model}}" [checked]="checkbox.checked" (change)="onMakeSelection('model', checkbox.model, $event)"></label> {{checkbox.model}}
+                  <label><input type="checkbox" value="{{checkbox.model}}" [checked]="checkbox.checked" (change)="onMakeSelection(checkbox.model.toLowerCase(), $event)"></label> {{checkbox.model}}
                 </div>
               </div>
             </form>
           </div>
 
-          <div class="form-group col-md-2">
-            <input type="text" class="form-control" placeholder="Year">
-          </div>
+          <!--<div class="form-group col-md-2">-->
+            <!--<input type="text" class="form-control" [(ngModel)]="searchYear" name="year" (input)="filterTable()" placeholder="Year">-->
+          <!--</div>-->
         </div>
         <div class="row">
           <div class="col">
@@ -55,20 +52,52 @@
               </div>
             </div>
           </div>
-          <div class="col">
-            <div class="horizontal text-muted">
-              <div class="text-overflow-ellipsis">
-                <span *ngFor="let selected of selectedModels">
-                  {{selected}},&nbsp;
-                </span>
-              </div>
-            </div>
-          </div>
+          <!--<div class="col">-->
+            <!--<div class="horizontal text-muted">-->
+              <!--<div class="text-overflow-ellipsis">-->
+                <!--<span *ngFor="let selected of selectedModels">-->
+                  <!--{{selected}},&nbsp;-->
+                <!--</span>-->
+              <!--</div>-->
+            <!--</div>-->
+          <!--</div>-->
           <div class="col-md-2"></div>
         </div>
       </form>
     </div>
-
     <div class="col"></div>
+  </div>
+
+  <div class="row">
+    <div class="col-xl-10">
+      <div class="row no-results" *ngIf="noResults">
+        No results found!
+      </div>
+      <div class="col p-table" id="gray-scrollbar">
+        <mat-card class="p-table-entry" *ngFor="let product of productsToDisplay">
+          <div class="row">
+            <div class="col-sm-1" style="margin-right: 10px; margin-top: 5px">
+              <img mat-card-image
+                   src="https://thenewswheel.com/wp-content/uploads/2018/08/Ford-Mustang-NASCAR-Cup-race-car-10-100x100.jpeg"
+                   style="width: 125px; height: 125px">
+            </div>
+            <div class="col">
+              <mat-card-title>{{product.model}}</mat-card-title>
+              <mat-card-subtitle>{{product.make}}, {{product.year}}</mat-card-subtitle>
+              <mat-card-content>
+                <p>
+                  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                  industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
+                  scrambled it to make a type specimen book.
+                </p>
+              </mat-card-content>
+            </div>
+            <div>
+              <button class="btn btn-outline-primary btn-inline" (click)="paymentPage()">Buy now</button>
+            </div>
+          </div>
+        </mat-card>
+      </div>
+    </div>
   </div>
 </div>

@@ -1,0 +1,48 @@
+.dashboard-outline {
+  border-radius: 25px;
+  height: 200px;
+}
+
+.dashboard {
+  margin-top: 10%;
+}
+
+.dashboard-form {
+  margin-top: 5%;
+  margin-left: 3%;
+  margin-right: 3%;
+}
+
+.scrollable-menu {
+  height: auto;
+  max-height: 500px;
+  overflow-x: hidden;
+}
+
+.dropdown-toggle {
+  width: 100%;
+}
+
+div.text-overflow-ellipsis {
+  width: 80%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.horizontal {
+  display: flex;
+}
+
+#demoFont {
+  font-family: "Arial Black", Gadget, sans-serif;
+  font-size: 35px;
+  letter-spacing: 2px;
+  word-spacing: 2px;
+  color: #218C07;
+  font-weight: 700;
+  text-decoration: none;
+  font-style: normal;
+  font-variant: normal;
+  text-transform: none;
+}
